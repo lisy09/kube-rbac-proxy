@@ -1,0 +1,8 @@
+FROM alpine:3.8
+ARG TARGETARCH
+ARG TARGETOS
+
+RUN apk add -U --no-cache ca-certificates && rm -rf /var/cache/apk/*
+COPY _output/${TARGETOS}/${TARGETARCH}/kube-rbac-proxy .
+ENTRYPOINT ["./kube-rbac-proxy"]
+EXPOSE 8080
